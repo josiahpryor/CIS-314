@@ -1,1 +1,2 @@
-print("Hello World")
+output = 1 + 2 + 3
+print(output)
