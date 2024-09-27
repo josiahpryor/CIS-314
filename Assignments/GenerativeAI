@@ -1,0 +1,25 @@
+import re
+
+def extract_unique_ips(log_file):
+    # Regular expression for matching IP addresses
+    ip_pattern = r'\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b'
+
+    # Set to store unique IP addresses
+    unique_ips = set()
+
+    # Read the log file
+    with open(log_file, 'r') as file:
+        for line in file:
+            # Find all IPs in the line
+            ips = re.findall(ip_pattern, line)
+            # Add them to the set to ensure uniqueness
+            unique_ips.update(ips)
+
+    return unique_ips
+
+# Example usage
+log_file_path = 'access.log'
+unique_ips = extract_unique_ips(log_file_path)
+print("Unique IP addresses found:")
+for ip in unique_ips:
+    print(ip)
