@@ -55,7 +55,7 @@ Asks the user for their class amount and then iterates through that amount
 collecting their class name and inserting them into a classes list that is returned.
 '''
 def classCollection():
-    classes = []
+    classes = [] 
     #Asks for class amount
     while True:
         try:
@@ -98,12 +98,15 @@ Creates subfolders with class names inside base college folder.
 def createSubFolders(classes): #list of class names
     class_dir = ""
     for Class in classes:
+        #\user\documents + \className
         class_dir = os.path.join(base_dir, Class) #uses base dir global var. to add class subdirectory
         makedirs(class_dir) #makes folder of base_dir + classname 
 
 '''
 Searches each file's name for a match to one of the class names inputted earlier.
-If 
+Makes:
+{Class1: Class1_file1, Class1_file2; Class2: Class2_file1, Class2_file2}
+
 '''
 def searchDirectory(directory, classes):
     files = os.listdir(directory) #provides list of all files/folders in directory
@@ -140,7 +143,7 @@ def sortFiles(classes):
     print("<- File Sorting: Sort files into your new college class folders ->")
     print("<- Any file that includes one of your provided classes in its name will be sorted into its respective folder ->")
     if yesORno("-> Are your files located in your default document folder?: "):
-        files_dir = defaultDir()
+        files_dir = defaultDir() #\user\documents
     else:
         files_dir = customDir()
     class_dict = searchDirectory(files_dir, classes) #With provided dir., files including a class name are sorted into a dict
@@ -158,6 +161,8 @@ def main():
     line()
 
     classes = classCollection()
+    if not classes:
+        return
 
     createBaseFolder()
 
